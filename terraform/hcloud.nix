@@ -18,5 +18,10 @@
       ipv4_enabled = true;
       ipv6_enabled = true;
     };
+    firewall_ids = [ "$\{hcloud_firewall.firewall.id}" ];
+  };
+
+  resource."hcloud_firewall"."firewall" = {
+    name = "firewall";
   };
 }
