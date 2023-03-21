@@ -8,11 +8,12 @@
         inputs = [
           config.packages.terraform-with-plugins
           pkgs.rage
+          pkgs.age-plugin-yubikey # Needed to encryption
         ];
         secretsMap.terraform-secret = "terraform-secret";
         tfstateName = "encrypted-terraform.tfstate";
         tfvarsPath = "${inputs.self}/secrets/terraform.tfvars.age";
-        ageRecipient = "age1fdqe6xc4q2vf4e5cc4w9qg52hdp9gz3zmgag90plh52ed3rdtgcq7mw97w";
+        ageRecipientsFilePath = "${inputs.self}/secrets/recipients.txt";
         TF_IN_AUTOMATION = 1;
         TF_INPUT = 0;
         TF_CLI_ARGS_init = "-compact-warnings";
@@ -31,7 +32,7 @@
         priorCheckScript = "terraform validate";
         effectScript = if (herculesCI.config.repo.branch == "master") then "terraform apply -auto-approve" else "terraform plan";
         putStateScript = ''
-          rage --recipient "$ageRecipient" --encrypt terraform.tfstate --output "$stateFileName"
+          rage --recipients-file "$ageRecipientsFilePath" --encrypt terraform.tfstate --output "$stateFileName"
           putStateFile "$tfstateName" "$stateFileName"
           echo "Cleaning up..."
           rm terraform.{tfstate,tfvars} encrypted-terraform.tfstate age-key.txt
