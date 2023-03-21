@@ -5,11 +5,6 @@
 
   perSystem = { pkgs, lib, config, ... }: {
     packages = {
-      terraform-with-plugins = (pkgs.terraform.withPlugins (p: with p; [
-        hcloud
-        cloudflare
-      ])) // { meta.mainProgram = "terraform"; };
-
       custom-rage = (pkgs.writeShellApplication {
         name = "rage";
         runtimeInputs = with pkgs; [ rage age-plugin-yubikey ];
