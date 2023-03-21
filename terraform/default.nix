@@ -6,6 +6,7 @@
       inherit system;
       modules = [
         ./hcloud.nix
+        ./cloudflare.nix
       ];
     };
   };
