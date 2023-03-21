@@ -1,9 +1,9 @@
 { inputs, ... }:
 
 {
-  perSystem = { system, ... }: {
+  perSystem = { pkgs, ... }: {
     packages.terraformConfiguration = inputs.terranix.lib.terranixConfiguration {
-      inherit system;
+      inherit pkgs;
       modules = [
         ./hcloud.nix
         ./cloudflare.nix
