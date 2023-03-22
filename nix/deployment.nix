@@ -9,6 +9,7 @@
           config.packages.terraform-with-plugins
           pkgs.rage
           pkgs.age-plugin-yubikey # Needed to encryption
+          pkgs.tree
         ];
         secretsMap.terraform-secret = "terraform-secret";
         tfstateName = "encrypted-terraform.tfstate";
@@ -16,7 +17,6 @@
         ageRecipientsFilePath = "${inputs.self}/secrets/recipients.txt";
         TF_IN_AUTOMATION = 1;
         TF_INPUT = 0;
-        TF_CLI_ARGS_init = "-compact-warnings";
         getStateScript = ''
           stateFileName="$PWD/$tfstateName"
           getStateFile "$tfstateName" "$stateFileName"
@@ -26,7 +26,7 @@
         '';
         userSetupPhase = ''
           rage --identity age-key.txt --decrypt "$tfvarsPath" --output terraform.tfvars
-          ln -s ${config.packages.terraformConfiguration} config.tf.json
+          ln -s ${config.packages.terraformConfiguration}/{config.tf.json,.terraform.lock.hcl} .
           terraform init
         '';
         priorCheckScript = "terraform validate";

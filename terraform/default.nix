@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  perSystem = { pkgs, ... }: {
+  perSystem = { pkgs, config, ... }: {
     packages = {
       terraform-with-plugins = (pkgs.terraform.withPlugins (p: with p; [
         hcloud
@@ -9,14 +9,24 @@
         tailscale
       ])) // { meta.mainProgram = "terraform"; };
 
-      terraformConfiguration = inputs.terranix.lib.terranixConfiguration {
-        inherit pkgs;
-        modules = [
-          ./hcloud.nix
-          ./cloudflare
-          ./tailscale.nix
-        ];
-      };
+      terraformConfiguration = pkgs.runCommand "config.tf.json"
+        {
+          terranixConfiguration = inputs.terranix.lib.terranixConfiguration {
+            inherit pkgs;
+            modules = [
+              ./hcloud.nix
+              ./cloudflare
+              ./tailscale.nix
+            ];
+          };
+          nativeBuildInputs = [ config.packages.terraform-with-plugins ];
+        } ''
+        mkdir "$out"
+        ln -s "$terranixConfiguration" "$out/config.tf.json"
+        terraform -chdir="$out" init -backend=false -compact-warnings
+        terraform -chdir="$out" validate -compact-warnings
+        rm -rf .terraform
+      '';
     };
   };
 }
