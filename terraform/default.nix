@@ -13,7 +13,7 @@
         inherit pkgs;
         modules = [
           ./hcloud.nix
-          ./cloudflare.nix
+          ./cloudflare
           ./tailscale.nix
         ];
       };
