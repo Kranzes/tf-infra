@@ -9,7 +9,6 @@
           config.packages.terraform-with-plugins
           pkgs.rage
           pkgs.age-plugin-yubikey # Needed to encryption
-          pkgs.tree
         ];
         secretsMap.terraform-secret = "terraform-secret";
         tfstateName = "encrypted-terraform.tfstate";
