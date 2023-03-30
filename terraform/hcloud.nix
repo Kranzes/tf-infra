@@ -7,11 +7,11 @@
     sensitive = true;
   };
 
-  provider."hcloud".token = "$\{var.hcloud_token}";
+  provider."hcloud".token = "$\{ var.hcloud_token }";
 
   resource."hcloud_server"."nixos" = {
     name = "nixos";
-    server_type = "cpx31";
+    server_type = "cx41";
     image = "fedora-37";
     datacenter = "fsn1-dc14";
     public_net = {
