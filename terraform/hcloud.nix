@@ -7,7 +7,7 @@
     sensitive = true;
   };
 
-  provider."hcloud".token = "$\{ var.hcloud_token }";
+  provider."hcloud".token = "$\{var.hcloud_token}";
 
   resource."hcloud_server"."nixos" = {
     name = "nixos";

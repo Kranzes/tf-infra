@@ -5,6 +5,18 @@
       zone = "ilanjoselevich.com";
     };
 
+    "cloudflare_pages_project"."ilanjoselevich-com" = {
+      name = "ilanjoselevich-com";
+      account_id = "$\{cloudflare_zone.ilanjoselevich-com.account_id}";
+      production_branch = "master";
+    };
+
+    "cloudflare_pages_domain"."ilanjoselevich-com" = {
+      project_name = "$\{cloudflare_pages_project.ilanjoselevich-com.name}";
+      account_id = "$\{cloudflare_pages_project.ilanjoselevich-com.account_id}";
+      domain = "ilanjoselevich.com";
+    };
+
     "cloudflare_record" = {
       "jellyfin-ilanjoselevich-com" = {
         name = "jellyfin";
@@ -22,10 +34,10 @@
         proxied = false;
       };
 
-      "ilanjoselevich-com-netlify" = {
+      "ilanjoselevich-com" = {
         name = "ilanjoselevich.com";
         type = "CNAME";
-        value = "apex-loadbalancer.netlify.com";
+        value = "$\{cloudflare_pages_project.ilanjoselevich-com.name}.pages.dev";
         zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
         proxied = true;
       };
