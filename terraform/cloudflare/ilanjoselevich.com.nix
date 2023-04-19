@@ -101,7 +101,7 @@
       };
 
       "ilanjoselevich-com-dmarc" = {
-        name = "ilanjoselevich.com";
+        name = "_dmarc";
         type = "TXT";
         value = "v=DMARC1; p=reject;";
         zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
