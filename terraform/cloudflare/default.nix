@@ -12,5 +12,6 @@
   imports = [
     ./ilanjoselevich.com.nix
     ./israel.nix.ug.nix
+    ./yaelcohen.net.nix
   ];
 }
