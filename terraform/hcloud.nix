@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   terraform.required_providers.hcloud.source = "hetznercloud/hcloud";
 
@@ -7,7 +9,7 @@
     sensitive = true;
   };
 
-  provider."hcloud".token = "$\{var.hcloud_token}";
+  provider."hcloud".token = lib.tfRef "var.hcloud_token";
 
   resource."hcloud_server"."nixos" = {
     name = "nixos";
@@ -18,7 +20,7 @@
       ipv4_enabled = true;
       ipv6_enabled = true;
     };
-    firewall_ids = [ "$\{hcloud_firewall.firewall.id}" ];
+    firewall_ids = [ (lib.tfRef "hcloud_firewall.firewall.id") ];
   };
 
   resource."hcloud_firewall"."firewall" = {

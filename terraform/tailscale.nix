@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   terraform.required_providers.tailscale.source = "tailscale/tailscale";
 
@@ -8,7 +10,7 @@
   };
 
   provider."tailscale" = {
-    api_key = "$\{var.tailscale_token}";
+    api_key = lib.tfRef "var.tailscale_token";
     tailnet = "kranzes.github";
   };
 

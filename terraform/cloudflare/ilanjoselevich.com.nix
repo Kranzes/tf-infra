@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   resource = {
     "cloudflare_zone"."ilanjoselevich-com" = {
@@ -7,13 +9,13 @@
 
     "cloudflare_pages_project"."ilanjoselevich-com" = {
       name = "ilanjoselevich-com";
-      account_id = "$\{cloudflare_zone.ilanjoselevich-com.account_id}";
+      account_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.account_id";
       production_branch = "master";
     };
 
     "cloudflare_pages_domain"."ilanjoselevich-com" = {
-      project_name = "$\{cloudflare_pages_project.ilanjoselevich-com.name}";
-      account_id = "$\{cloudflare_pages_project.ilanjoselevich-com.account_id}";
+      project_name = lib.tfRef "cloudflare_pages_project.ilanjoselevich-com.name";
+      account_id = lib.tfRef "cloudflare_pages_project.ilanjoselevich-com.account_id";
       domain = "ilanjoselevich.com";
     };
 
@@ -22,7 +24,7 @@
         name = "jellyfin";
         type = "A";
         value = "84.228.127.28";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
 
@@ -30,15 +32,15 @@
         name = "cloud";
         type = "A";
         value = "84.228.127.28";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
 
       "ilanjoselevich-com" = {
         name = "ilanjoselevich.com";
         type = "CNAME";
-        value = "$\{cloudflare_pages_project.ilanjoselevich-com.name}.pages.dev";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        value = (lib.tfRef "cloudflare_pages_project.ilanjoselevich-com.name") + ".pages.dev";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = true;
       };
 
@@ -46,7 +48,7 @@
         name = "autoconfig";
         type = "CNAME";
         value = "autoconfig.migadu.com";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = true;
       };
 
@@ -54,7 +56,7 @@
         name = "autodiscover";
         type = "CNAME";
         value = "autodiscover.migadu.com";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = true;
       };
 
@@ -62,7 +64,7 @@
         name = "key1._domainkey";
         type = "CNAME";
         value = "key1.ilanjoselevich.com._domainkey.migadu.com";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = true;
       };
 
@@ -70,7 +72,7 @@
         name = "key2._domainkey";
         type = "CNAME";
         value = "key2.ilanjoselevich.com._domainkey.migadu.com";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = true;
       };
 
@@ -78,7 +80,7 @@
         name = "key3._domainkey";
         type = "CNAME";
         value = "key3.ilanjoselevich.com._domainkey.migadu.com";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = true;
       };
 
@@ -86,7 +88,7 @@
         name = "ilanjoselevich.com";
         type = "MX";
         value = "aspmx1.migadu.com";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         priority = 10;
         proxied = false;
       };
@@ -95,7 +97,7 @@
         name = "ilanjoselevich.com";
         type = "MX";
         value = "aspmx2.migadu.com";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         priority = 20;
         proxied = false;
       };
@@ -104,7 +106,7 @@
         name = "_dmarc";
         type = "TXT";
         value = "v=DMARC1; p=reject;";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
 
@@ -112,7 +114,7 @@
         name = "ilanjoselevich.com";
         type = "TXT";
         value = "v=spf1 include:spf.migadu.com -all";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
 
@@ -120,7 +122,7 @@
         name = "ilanjoselevich.com";
         type = "TXT";
         value = "hosted-email-verify=ieogkobz";
-        zone_id = "$\{cloudflare_zone.ilanjoselevich-com.id}";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
     };
