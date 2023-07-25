@@ -1,12 +1,14 @@
 { withSystem, config, inputs, ... }:
 
 {
+  imports = [ inputs.hercules-ci-effects.flakeModule ];
+
   herculesCI = herculesCI: {
     onPush.default.outputs.effects.terraform-deploy = withSystem config.defaultEffectSystem ({ pkgs, config, hci-effects, ... }:
       hci-effects.mkEffect {
         name = "terraform-deploy";
         inputs = [
-          config.packages.terraform-with-plugins
+          config.packages.terraformWithPlugins
           pkgs.rage
           pkgs.age-plugin-yubikey # Needed to encryption
         ];
