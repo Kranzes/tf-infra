@@ -20,12 +20,20 @@
     };
 
     "cloudflare_record" = {
-      "jellyfin-ilanjoselevich-com" = {
-        name = "jellyfin";
-        type = "A";
-        value = "84.228.127.28";
+      "ilanjoselevich-com" = {
+        name = "ilanjoselevich.com";
+        type = "CNAME";
+        value = (lib.tfRef "cloudflare_pages_project.ilanjoselevich-com.name") + ".pages.dev";
         zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
-        proxied = false;
+        proxied = true;
+      };
+
+      "idm-ilanjoselevich-com" = {
+        name = "idm";
+        type = "A";
+        value = lib.tfRef "hcloud_server.nixos.ipv4_address";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
+        proxied = true;
       };
 
       "cloud-ilanjoselevich-com" = {
@@ -36,12 +44,12 @@
         proxied = false;
       };
 
-      "ilanjoselevich-com" = {
-        name = "ilanjoselevich.com";
-        type = "CNAME";
-        value = (lib.tfRef "cloudflare_pages_project.ilanjoselevich-com.name") + ".pages.dev";
+      "jellyfin-ilanjoselevich-com" = {
+        name = "jellyfin";
+        type = "A";
+        value = "84.228.127.28";
         zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
-        proxied = true;
+        proxied = false;
       };
 
       "ilanjoselevich-com-autoconfig" = {

@@ -4,6 +4,7 @@
   perSystem = { pkgs, config, ... }: {
     packages = {
       terraform-with-plugins = (pkgs.terraform.withPlugins (p: with p; [
+        hcloud
         cloudflare
         tailscale
       ])) // { meta.mainProgram = "terraform"; };
@@ -13,6 +14,7 @@
           terranixConfiguration = inputs.terranix.lib.terranixConfiguration {
             inherit pkgs;
             modules = [
+              ./hcloud.nix
               ./cloudflare
               ./tailscale.nix
             ];
