@@ -1,7 +1,10 @@
 { inputs, ... }:
 
 {
-  perSystem = { pkgs, config, ... }: {
+  perSystem = { pkgs, system, config, ... }: {
+    # 🖕HashiCorp
+    _module.args.pkgs = import inputs.nixpkgs { inherit system; config.allowUnfree = true; };
+
     packages = {
       terraformWithPlugins = pkgs.terraform.withPlugins (p: with p; [
         hcloud
