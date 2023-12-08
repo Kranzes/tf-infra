@@ -68,6 +68,14 @@
         proxied = false;
       };
 
+      "sshx-ilanjoselevich-com" = {
+        name = "sshx";
+        type = "A";
+        value = "84.228.127.28";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
+        proxied = false;
+      };
+
       "ilanjoselevich-com-autoconfig" = {
         name = "autoconfig";
         type = "CNAME";
