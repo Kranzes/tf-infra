@@ -11,13 +11,11 @@
 
   provider."tailscale" = {
     api_key = lib.tfRef "var.tailscale_token";
-    tailnet = "kranzes.github";
+    tailnet = "ilanjoselevich.com";
   };
 
-  resource."tailscale_acl"."kranzes-github-ts-acl" = {
+  resource."tailscale_acl"."ilanjoselevich-com-ts-acl" = {
     acl = builtins.toJSON {
-      groups."group:admin" = [ "kranzes@github" ];
-
       acls = [
         # All members can access their own devices
         {
@@ -28,18 +26,18 @@
         # All users of group "admin" and devices tagged as "infra" can access devices tagged tag:infra
         {
           action = "accept";
-          src = [ "tag:infra" "group:admin" ];
+          src = [ "tag:infra" "autogroup:admin" ];
           dst = [ "tag:infra:*" ];
         }
         # Users of group "admin" can access everything
         {
           action = "accept";
-          src = [ "group:admin" ];
+          src = [ "autogroup:admin" ];
           dst = [ "*:*" ];
         }
       ];
       # Users in group:infra can apply the tag tag:infra
-      tagOwners."tag:infra" = [ "group:admin" ];
+      tagOwners."tag:infra" = [ "autogroup:admin" ];
     };
   };
 }
