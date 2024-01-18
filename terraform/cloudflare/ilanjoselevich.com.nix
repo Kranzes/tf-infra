@@ -36,14 +36,6 @@
         proxied = true;
       };
 
-      "login-ilanjoselevich-com" = {
-        name = "login";
-        type = "A";
-        value = "84.228.127.28";
-        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
-        proxied = true;
-      };
-
       "monitoring-ilanjoselevich-com" = {
         name = "monitoring";
         type = "A";
