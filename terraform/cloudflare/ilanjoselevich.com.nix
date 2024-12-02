@@ -36,14 +36,6 @@
         proxied = true;
       };
 
-      "monitoring-ilanjoselevich-com" = {
-        name = "monitoring";
-        type = "A";
-        value = "84.228.127.28";
-        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
-        proxied = true;
-      };
-
       "cloud-ilanjoselevich-com" = {
         name = "cloud";
         type = "A";
@@ -54,14 +46,6 @@
 
       "jellyfin-ilanjoselevich-com" = {
         name = "jellyfin";
-        type = "A";
-        value = "84.228.127.28";
-        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
-        proxied = false;
-      };
-
-      "sshx-ilanjoselevich-com" = {
-        name = "sshx";
         type = "A";
         value = "84.228.127.28";
         zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
