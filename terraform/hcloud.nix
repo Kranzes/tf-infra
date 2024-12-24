@@ -13,7 +13,7 @@
 
   resource."hcloud_server"."nixos" = {
     name = "nixos";
-    server_type = "cx21";
+    server_type = "cx32";
     image = "fedora-38";
     datacenter = "nbg1-dc3";
     public_net = {
