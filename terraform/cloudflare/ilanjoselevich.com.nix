@@ -44,6 +44,14 @@
         proxied = true;
       };
 
+      "portal-ilanjoselevich-com" = {
+        name = "portal";
+        type = "A";
+        value = lib.tfRef "hcloud_server.nixos.ipv4_address";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
+        proxied = true;
+      };
+
       "cloud-ilanjoselevich-com" = {
         name = "cloud";
         type = "A";
