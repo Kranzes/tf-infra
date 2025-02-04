@@ -14,13 +14,14 @@
   resource."hcloud_server"."nixos" = {
     name = "nixos";
     server_type = "cx32";
-    image = "fedora-38";
+    image = "fedora-41";
     datacenter = "nbg1-dc3";
     public_net = {
       ipv4_enabled = true;
       ipv6_enabled = true;
     };
     firewall_ids = [ (lib.tfRef "hcloud_firewall.firewall.id") ];
+    lifecycle.ignore_changes = [ "ssh_keys" ];
     delete_protection = true;
     rebuild_protection = true;
   };
