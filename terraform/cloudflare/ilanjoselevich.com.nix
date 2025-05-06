@@ -36,14 +36,6 @@
         proxied = true;
       };
 
-      "secret-ilanjoselevich-com" = {
-        name = "secret";
-        type = "A";
-        value = lib.tfRef "hcloud_server.nixos.ipv4_address";
-        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
-        proxied = false;
-      };
-
       "monitoring-ilanjoselevich-com" = {
         name = "monitoring";
         type = "A";
