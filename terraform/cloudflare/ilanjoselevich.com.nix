@@ -76,6 +76,14 @@
         proxied = false;
       };
 
+      "seerr-ilanjoselevich-com" = {
+        name = "seerr";
+        type = "A";
+        value = "212.29.220.119";
+        zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
+        proxied = false;
+      };
+
       "ilanjoselevich-com-autoconfig" = {
         name = "autoconfig";
         type = "CNAME";
