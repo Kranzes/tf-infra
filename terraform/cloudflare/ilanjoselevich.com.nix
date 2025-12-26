@@ -55,7 +55,7 @@
       "cloud-ilanjoselevich-com" = {
         name = "cloud";
         type = "A";
-        value = "212.29.220.119";
+        value = "199.203.36.247";
         zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
@@ -63,7 +63,7 @@
       "jellyfin-ilanjoselevich-com" = {
         name = "jellyfin";
         type = "A";
-        value = "212.29.220.119";
+        value = "199.203.36.247";
         zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
@@ -71,7 +71,7 @@
       "home-ilanjoselevich-com" = {
         name = "home";
         type = "A";
-        value = "212.29.220.119";
+        value = "199.203.36.247";
         zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
@@ -79,7 +79,7 @@
       "seerr-ilanjoselevich-com" = {
         name = "seerr";
         type = "A";
-        value = "212.29.220.119";
+        value = "199.203.36.247";
         zone_id = lib.tfRef "cloudflare_zone.ilanjoselevich-com.id";
         proxied = false;
       };
